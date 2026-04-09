@@ -17,27 +17,40 @@ h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px
 .section.active{display:block}
 
 /* Leaderboard */
-.board{display:flex;flex-direction:column;gap:10px;max-width:600px;margin:0 auto}
-.team-card{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:16px}
+.board{display:flex;flex-direction:column;gap:12px;max-width:700px;margin:0 auto}
+.team-card{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:16px 18px}
+.team-top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
 .rank{font-size:24px;min-width:40px}
 .t-info{flex:1}
-.t-name{font-size:15px;font-weight:600;color:#fff}
+.t-name{font-size:16px;font-weight:700;color:#fff}
 .t-mem{font-size:12px;color:#888;margin-bottom:6px}
 .bar-bg{height:6px;background:#1a1a4e;border-radius:3px}
 .bar-fill{height:6px;border-radius:3px;background:linear-gradient(90deg,#1a1a9e,#c0392b);transition:width .5s}
 .t-score{font-size:28px;font-weight:700;color:#e8c84a}
+/* Players row inside leaderboard */
+.players-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;border-top:1px solid #2a2a6e;padding-top:10px}
+.p-chip{display:flex;align-items:center;gap:6px;background:#1a1a5e;border-radius:20px;padding:4px 10px}
+.avatar-sm{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.p-chip-name{font-size:12px;color:#ddd}
+.p-chip-pts{font-size:12px;font-weight:700;color:#e8c84a;margin-left:2px}
 
-/* Players */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;max-width:700px;margin:0 auto}
-.pcard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px;text-align:center}
-.avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;margin:0 auto 8px}
-.p-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
-.p-team{font-size:11px;color:#888;margin-bottom:8px}
-.p-pts{font-size:26px;font-weight:700;color:#e8c84a}
-.p-lbl{font-size:11px;color:#888}
+/* Players table */
+.team-section{max-width:700px;margin:0 auto 20px}
+.team-header{font-size:15px;font-weight:700;color:#e8c84a;margin-bottom:8px;padding-left:4px}
+.ptable{width:100%;border-collapse:collapse;background:#12124a;border-radius:12px;overflow:hidden;border:1px solid #2a2a6e}
+.ptable th{background:#1a1a5e;font-size:12px;color:#aaa;padding:8px 14px;text-align:left;font-weight:500}
+.ptable td{padding:8px 14px;font-size:13px;border-top:1px solid #1a1a4e;color:#fff}
+.ptable tr:hover td{background:#1a1a5e}
 
 /* Admin */
-.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;max-width:700px;margin:0 auto}
+.admin-wrap{max-width:700px;margin:0 auto}
+.lock-screen{text-align:center;padding:40px 20px}
+.lock-screen p{color:#aaa;margin-bottom:16px;font-size:14px}
+.pin-input{background:#12124a;border:1px solid #2a2a6e;border-radius:8px;padding:10px 16px;font-size:18px;color:#fff;text-align:center;width:180px;letter-spacing:6px}
+.unlock-btn{margin-top:12px;padding:10px 28px;background:#c0392b;color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600}
+.unlock-btn:hover{background:#e04040}
+.err{color:#e04040;font-size:13px;margin-top:8px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
 .acard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px}
 .a-name{flex:1;font-size:14px;font-weight:500;color:#fff}
 .a-pts{font-size:18px;font-weight:700;color:#e8c84a;min-width:36px;text-align:center}
@@ -62,15 +75,29 @@ h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px
 <div class="tabs">
   <button class="tab active" onclick="show('leaderboard',this)">Leaderboard</button>
   <button class="tab" onclick="show('players',this)">Players</button>
-  <button class="tab" onclick="show('admin',this)">Add Points</button>
+  <button class="tab" onclick="show('admin',this)">🔒 Add Points</button>
   <button class="tab" onclick="show('rules',this)">Rules</button>
 </div>
 
 <div id="leaderboard" class="section active"></div>
 <div id="players" class="section"></div>
 <div id="admin" class="section">
-  <p style="text-align:center;font-size:13px;color:#888;margin-bottom:14px">Use + / − to update points per player</p>
-  <div class="agrid" id="admin-grid"></div>
+  <div class="admin-wrap">
+    <div id="lock-screen" class="lock-screen">
+      <div style="font-size:40px;margin-bottom:12px">🔒</div>
+      <p>Enter the admin password to add points</p>
+      <input class="pin-input" type="password" id="pin-input" placeholder="••••" maxlength="6" onkeydown="if(event.key==='Enter')unlock()"/>
+      <br/><button class="unlock-btn" onclick="unlock()">Unlock</button>
+      <p class="err" id="pin-err"></p>
+    </div>
+    <div id="admin-panel" style="display:none">
+      <p style="text-align:center;font-size:13px;color:#aaa;margin-bottom:14px">Use + / − to update points per player</p>
+      <div class="agrid" id="admin-grid"></div>
+      <div style="text-align:center;margin-top:16px">
+        <button onclick="lock()" style="padding:8px 20px;background:transparent;border:1px solid #444;border-radius:20px;color:#aaa;cursor:pointer;font-size:13px">🔒 Lock</button>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="rules" class="section">
   <div class="rlist">
@@ -83,11 +110,12 @@ h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px
 </div>
 
 <script>
+const PASS="eliz2026";
 const teams=[
-  {name:"ROI Rangers",emoji:"📈",bg:"#1a1a6e",light:"#2a2a8e",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
-  {name:"The Converters",emoji:"🔄",bg:"#6e1a1a",light:"#8e2a2a",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
-  {name:"The CTR Crew",emoji:"📊",bg:"#1a1a6e",light:"#2a2a8e",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
-  {name:"Last Mile Legends",emoji:"🚀",bg:"#6e1a1a",light:"#8e2a2a",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
+  {name:"ROI Rangers",emoji:"📈",light:"#2a2a8e",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
+  {name:"The Converters",emoji:"🔄",light:"#8e2a2a",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
+  {name:"The CTR Crew",emoji:"📊",light:"#2a2a8e",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
+  {name:"Last Mile Legends",emoji:"🚀",light:"#8e2a2a",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
 ];
 const pts={};
 teams.forEach(t=>t.members.forEach(m=>pts[m]=0));
@@ -99,32 +127,48 @@ function renderLB(){
   const s=[...teams].sort((a,b)=>tot(b)-tot(a));
   const mx=Math.max(...s.map(t=>tot(t)),1);
   document.getElementById("leaderboard").innerHTML='<div class="board">'+
-    s.map((t,i)=>{const total=tot(t);return`<div class="team-card">
-      <div class="rank">${ranks[i]}</div>
-      <div class="t-info">
-        <div class="t-name">${t.emoji} ${t.name}</div>
-        <div class="t-mem">${t.members.length} members</div>
-        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(total/mx*100)}%"></div></div>
-      </div>
-      <div class="t-score">${total}</div>
-    </div>`;}).join('')+'</div>';
+    s.map((t,i)=>{
+      const total=tot(t);
+      const chips=t.members.map(m=>`<div class="p-chip">
+        <div class="avatar-sm" style="background:${t.light}">${ini(m)}</div>
+        <span class="p-chip-name">${m}</span>
+        <span class="p-chip-pts">${pts[m]||0}</span>
+      </div>`).join('');
+      return`<div class="team-card">
+        <div class="team-top">
+          <div class="rank">${ranks[i]}</div>
+          <div class="t-info">
+            <div class="t-name">${t.emoji} ${t.name}</div>
+            <div class="t-mem">${t.members.length} members</div>
+            <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(total/mx*100)}%"></div></div>
+          </div>
+          <div class="t-score">${total}</div>
+        </div>
+        <div class="players-row">${chips}</div>
+      </div>`;
+    }).join('')+'</div>';
 }
 
 function renderPlayers(){
-  document.getElementById("players").innerHTML='<div class="pgrid">'+
-    teams.flatMap(t=>t.members.map(m=>`<div class="pcard">
-      <div class="avatar" style="background:${t.light}">${ini(m)}</div>
-      <div class="p-name">${m}</div>
-      <div class="p-team">${t.name}</div>
-      <div class="p-pts">${pts[m]||0}</div>
-      <div class="p-lbl">pts</div>
-    </div>`)).join('')+'</div>';
+  document.getElementById("players").innerHTML=
+    teams.map(t=>`<div class="team-section">
+      <div class="team-header">${t.emoji} ${t.name}</div>
+      <table class="ptable">
+        <thead><tr><th>Player</th><th>Points</th></tr></thead>
+        <tbody>${t.members.map(m=>`<tr>
+          <td><div style="display:flex;align-items:center;gap:8px">
+            <div class="avatar-sm" style="background:${t.light}">${ini(m)}</div>${m}
+          </div></td>
+          <td style="color:#e8c84a;font-weight:700">${pts[m]||0}</td>
+        </tr>`).join('')}</tbody>
+      </table>
+    </div>`).join('');
 }
 
 function renderAdmin(){
   document.getElementById("admin-grid").innerHTML=
     teams.flatMap(t=>t.members.map(m=>`<div class="acard">
-      <div class="avatar" style="background:${t.light};width:32px;height:32px;font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${ini(m)}</div>
+      <div class="avatar-sm" style="background:${t.light};width:32px;height:32px;font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${ini(m)}</div>
       <div class="a-name">${m}</div>
       <button class="btn" onclick="ch('${m}',-1)">−</button>
       <div class="a-pts" id="ap-${m}">${pts[m]||0}</div>
@@ -139,6 +183,25 @@ function ch(name,delta){
   renderLB();renderPlayers();
 }
 
+function unlock(){
+  const v=document.getElementById("pin-input").value;
+  if(v===PASS){
+    document.getElementById("lock-screen").style.display="none";
+    document.getElementById("admin-panel").style.display="block";
+    renderAdmin();
+  } else {
+    document.getElementById("pin-err").textContent="❌ Wrong password. Try again.";
+    document.getElementById("pin-input").value="";
+  }
+}
+
+function lock(){
+  document.getElementById("lock-screen").style.display="block";
+  document.getElementById("admin-panel").style.display="none";
+  document.getElementById("pin-input").value="";
+  document.getElementById("pin-err").textContent="";
+}
+
 function show(id,el){
   document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
@@ -146,10 +209,9 @@ function show(id,el){
   el.classList.add("active");
   if(id==="leaderboard")renderLB();
   if(id==="players")renderPlayers();
-  if(id==="admin")renderAdmin();
 }
 
-renderLB();renderPlayers();renderAdmin();
+renderLB();renderPlayers();
 </script>
 </body>
 </html>
