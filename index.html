@@ -4,202 +4,359 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Elizampionship 🏆</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Nunito:wght@700;900&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:sans-serif;background:#0a0a2e;color:#fff;min-height:100vh;padding:20px}
-h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px}
-.sub{text-align:center;font-size:13px;color:#aaa;margin-bottom:20px}
-.deco{text-align:center;font-size:22px;letter-spacing:8px;margin-bottom:8px;color:#c0392b}
-.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-.tab{padding:8px 20px;border-radius:20px;border:1px solid #444;font-size:13px;cursor:pointer;background:transparent;color:#aaa;transition:all .2s}
-.tab.active{background:#c0392b;color:#fff;border-color:#c0392b}
-.section{display:none}
-.section.active{display:block}
+body{font-family:'Nunito',sans-serif;background:#fff;min-height:100vh;padding:20px;position:relative}
+#bg-svg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.09}
+.wrap{position:relative;z-index:1}
+.deco{text-align:center;font-size:24px;letter-spacing:10px;margin-bottom:6px;color:#c0392b}
+h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color:#111;text-shadow:4px 4px 0 #e8c84a;margin-bottom:4px}
+.sub{text-align:center;font-size:13px;font-weight:900;color:#555;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+.tabs{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.tab{padding:10px 22px;border:4px solid #111;font-size:14px;font-weight:900;cursor:pointer;background:#fff;color:#111;text-transform:uppercase;letter-spacing:1px;box-shadow:5px 5px 0 #111;font-family:'Nunito',sans-serif}
+.tab:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #111}
+.tab.active{transform:translate(4px,4px);box-shadow:0 0 0 #111;background:#111;color:#fff}
+.section{display:none}.section.active{display:block}
 
-/* Leaderboard */
-.board{display:flex;flex-direction:column;gap:12px;max-width:700px;margin:0 auto}
-.team-card{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:16px 18px}
-.team-top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.rank{font-size:24px;min-width:40px}
-.t-info{flex:1}
-.t-name{font-size:16px;font-weight:700;color:#fff}
-.t-mem{font-size:12px;color:#888;margin-bottom:6px}
-.bar-bg{height:6px;background:#1a1a4e;border-radius:3px}
-.bar-fill{height:6px;border-radius:3px;background:linear-gradient(90deg,#1a1a9e,#c0392b);transition:width .5s}
-.t-score{font-size:28px;font-weight:700;color:#e8c84a}
-/* Players row inside leaderboard */
-.players-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;border-top:1px solid #2a2a6e;padding-top:10px}
-.p-chip{display:flex;align-items:center;gap:6px;background:#1a1a5e;border-radius:20px;padding:4px 10px}
-.avatar-sm{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.p-chip-name{font-size:12px;color:#ddd}
-.p-chip-pts{font-size:12px;font-weight:700;color:#e8c84a;margin-left:2px}
+/* LEADERBOARD */
+.board{display:flex;flex-direction:column;gap:12px;max-width:660px;margin:0 auto}
+.tc{background:#fff;border:5px solid #111;box-shadow:7px 7px 0 #111;padding:10px 12px;position:relative;overflow:hidden}
+.lb-row{display:flex;align-items:center;gap:10px;position:relative;z-index:2}
+.medal{font-family:'Permanent Marker',cursive;font-size:28px;font-style:italic;position:relative}
+.medal svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.namebox{flex:1;border:3px solid #111;padding:5px 10px;box-shadow:2px 2px 0 #111;background:#fff;position:relative}
+.tname{font-family:'Permanent Marker',cursive;font-size:15px;color:#111;font-style:italic;letter-spacing:1px}
+.tsub{font-size:10px;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:2px;margin-top:1px}
+.underline-rough{display:block;width:100%;height:5px;margin-top:2px}
+.scorebox{border:4px solid #111;padding:5px 12px;box-shadow:3px 3px 0 #111;text-align:center;background:#fff;position:relative}
+.score{font-family:'Permanent Marker',cursive;font-size:30px;color:#111;display:block;line-height:1;font-style:italic}
+.spts{font-size:9px;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:1px}
+.figrow{display:flex;align-items:flex-end;gap:2px;border-top:3px solid #111;margin-top:8px;padding-top:4px;position:relative;min-height:66px;overflow:hidden}
 
-/* Players table */
-.team-section{max-width:700px;margin:0 auto 20px}
-.team-header{font-size:15px;font-weight:700;color:#e8c84a;margin-bottom:8px;padding-left:4px}
-.ptable{width:100%;border-collapse:collapse;background:#12124a;border-radius:12px;overflow:hidden;border:1px solid #2a2a6e}
-.ptable th{background:#1a1a5e;font-size:12px;color:#aaa;padding:8px 14px;text-align:left;font-weight:500}
-.ptable td{padding:8px 14px;font-size:13px;border-top:1px solid #1a1a4e;color:#fff}
-.ptable tr:hover td{background:#1a1a5e}
+/* PLAYERS */
+.tblock{max-width:700px;margin:0 auto 22px}
+.tlabel{font-family:'Permanent Marker',cursive;font-size:17px;margin-bottom:12px;padding:8px 16px 8px 10px;border:5px solid #111;display:inline-flex;align-items:center;gap:9px;box-shadow:6px 6px 0 #111;font-style:italic;letter-spacing:1px;color:#111}
+.tl0{background:#e8c84a}.tl1{background:#e74c3c;color:#fff}.tl2{background:#3498db;color:#fff}.tl3{background:#2ecc71}
+.lico{width:24px;height:24px;border:3px solid #111;background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;color:#111}
+.tl1 .lico,.tl2 .lico{border-color:rgba(255,255,255,0.6)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+.pchip{border:4px solid #111;padding:10px;text-align:center;box-shadow:4px 4px 0 #111}
+.pc0{background:#fffbe6}.pc1{background:#fde8e8}.pc2{background:#e8f4fd}.pc3{background:#e8fdf0}
+.pname{font-size:12px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:2px}
+.ppts{font-family:'Permanent Marker',cursive;font-size:24px;color:#111;line-height:1;font-style:italic}
 
-/* Admin */
-.admin-wrap{max-width:700px;margin:0 auto}
-.lock-screen{text-align:center;padding:40px 20px}
-.lock-screen p{color:#aaa;margin-bottom:16px;font-size:14px}
-.pin-input{background:#12124a;border:1px solid #2a2a6e;border-radius:8px;padding:10px 16px;font-size:18px;color:#fff;text-align:center;width:180px;letter-spacing:6px}
-.unlock-btn{margin-top:12px;padding:10px 28px;background:#c0392b;color:#fff;border:none;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600}
-.unlock-btn:hover{background:#e04040}
-.err{color:#e04040;font-size:13px;margin-top:8px}
-.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.acard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px}
-.a-name{flex:1;font-size:14px;font-weight:500;color:#fff}
-.a-pts{font-size:18px;font-weight:700;color:#e8c84a;min-width:36px;text-align:center}
-.btn{width:30px;height:30px;border-radius:50%;border:1px solid #444;background:#1a1a4e;cursor:pointer;font-size:18px;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.btn:hover{background:#c0392b;border-color:#c0392b}
+/* ADMIN */
+.awrap{max-width:700px;margin:0 auto}
+.lkscr{text-align:center;padding:40px 20px}
+.lkico{font-size:56px;margin-bottom:14px}
+.lkscr p{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#111;margin-bottom:14px}
+.pininp{border:5px solid #111;padding:12px 20px;font-size:20px;text-align:center;width:190px;letter-spacing:8px;font-family:'Permanent Marker',cursive;box-shadow:4px 4px 0 #111;outline:none;background:#fff;color:#111}
+.ulbtn{display:block;margin:14px auto 0;padding:12px 32px;background:#e8c84a;color:#111;border:4px solid #111;font-size:14px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;box-shadow:5px 5px 0 #111;font-family:'Nunito',sans-serif}
+.ulbtn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #111}
+.pinerr{color:#e74c3c;font-size:12px;font-weight:900;margin-top:10px;text-transform:uppercase}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:10px}
+.acard{border:3px solid #111;padding:9px 12px;display:flex;align-items:center;gap:8px;background:#fff;box-shadow:3px 3px 0 #111}
+.aname{flex:1;font-size:12px;font-weight:900;text-transform:uppercase;color:#111}
+.apts{font-family:'Permanent Marker',cursive;font-size:20px;min-width:32px;text-align:center;color:#111;font-style:italic}
+.abtn{width:28px;height:28px;border:3px solid #111;background:#fff;cursor:pointer;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #111;font-family:'Nunito',sans-serif;color:#111}
+.abtn:hover{background:#e8c84a}
+.lkbtn{margin:18px auto 0;display:block;padding:8px 22px;background:#fff;border:3px solid #111;font-size:12px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;box-shadow:3px 3px 0 #111;font-family:'Nunito',sans-serif;color:#111}
 
-/* Rules */
-.rlist{display:flex;flex-direction:column;gap:10px;max-width:600px;margin:0 auto}
-.rcard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px 18px}
-.r-title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.badge{background:#c0392b;color:#fff;font-size:12px;padding:2px 10px;border-radius:10px;font-weight:600}
-.r-name{font-size:14px;font-weight:600;color:#fff}
-.r-desc{font-size:13px;color:#aaa;line-height:1.6}
-.note{text-align:center;font-size:12px;color:#666;margin-top:14px}
+/* RULES */
+.rlist{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
+.rcard{border:5px solid #111;padding:14px 18px;box-shadow:6px 6px 0 #111}
+.rc0{background:#e8c84a}.rc1{background:#e74c3c;color:#fff}.rc2{background:#3498db;color:#fff}.rc3{background:#2ecc71}
+.rtop{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.rpts{font-family:'Permanent Marker',cursive;font-size:24px;font-style:italic}
+.rname{font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.rdesc{font-size:13px;font-weight:700;opacity:0.85;line-height:1.5}
+.rnote{text-align:center;font-size:11px;font-weight:900;color:#888;margin-top:12px;text-transform:uppercase;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="deco">★ ☽ ★</div>
-<h1>Elizampionship</h1>
-<p class="sub">Season 1 — 2026 Edition</p>
 
-<div class="tabs">
-  <button class="tab active" onclick="show('leaderboard',this)">Leaderboard</button>
-  <button class="tab" onclick="show('players',this)">Players</button>
-  <button class="tab" onclick="show('admin',this)">🔒 Add Points</button>
-  <button class="tab" onclick="show('rules',this)">Rules</button>
-</div>
+<!-- GLOBAL DOODLE BACKGROUND -->
+<svg id="bg-svg" xmlns="http://www.w3.org/2000/svg">
+  <path d="M55,28 C55,18 45,13 40,20 C35,13 25,18 25,28 C25,38 40,50 40,50Z" fill="none" stroke="#111" stroke-width="3"/>
+  <circle cx="115" cy="55" r="25" fill="none" stroke="#111" stroke-width="3"/>
+  <line x1="115" y1="55" x2="115" y2="38" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="115" y1="55" x2="130" y2="63" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <rect x="210" y="38" width="46" height="32" rx="2" fill="none" stroke="#111" stroke-width="3"/>
+  <polyline points="210,38 233,56 256,38" fill="none" stroke="#111" stroke-width="3"/>
+  <line x1="640" y1="72" x2="640" y2="28" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+  <polyline points="626,46 640,28 654,46" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M305,50 A22,22 0 1,1 292,73" fill="none" stroke="#111" stroke-width="3.5"/>
+  <polyline points="282,64 292,76 302,64" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="464" y="50" width="11" height="27" fill="none" stroke="#111" stroke-width="2.5"/>
+  <rect x="480" y="36" width="11" height="41" fill="none" stroke="#111" stroke-width="2.5"/>
+  <rect x="496" y="20" width="11" height="57" fill="none" stroke="#111" stroke-width="2.5"/>
+  <line x1="460" y1="77" x2="510" y2="77" stroke="#111" stroke-width="2.5"/>
+  <circle cx="818" cy="50" r="25" fill="none" stroke="#111" stroke-width="3"/>
+  <ellipse cx="818" cy="50" rx="12" ry="25" fill="none" stroke="#111" stroke-width="2"/>
+  <line x1="793" y1="50" x2="843" y2="50" stroke="#111" stroke-width="2"/>
+  <line x1="796" y1="34" x2="840" y2="34" stroke="#111" stroke-width="2"/>
+  <line x1="796" y1="66" x2="840" y2="66" stroke="#111" stroke-width="2"/>
+  <circle cx="928" cy="122" r="25" fill="none" stroke="#111" stroke-width="3"/>
+  <text x="928" y="130" text-anchor="middle" font-size="19" font-weight="900" fill="#111" font-family="sans-serif">$</text>
+  <rect x="854" y="196" width="54" height="37" rx="9" fill="none" stroke="#111" stroke-width="3"/>
+  <circle cx="870" cy="214" r="3.5" fill="#111"/><circle cx="881" cy="214" r="3.5" fill="#111"/><circle cx="892" cy="214" r="3.5" fill="#111"/>
+  <polyline points="864,233 856,249 876,233" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="44" y="493" width="35" height="28" rx="2" fill="none" stroke="#111" stroke-width="3"/>
+  <line x1="44" y1="507" x2="79" y2="507" stroke="#111" stroke-width="2.5"/><line x1="62" y1="493" x2="62" y2="507" stroke="#111" stroke-width="2.5"/>
+  <text x="426" y="155" font-size="30" font-weight="900" fill="#111" font-family="sans-serif">%</text>
+  <text x="323" y="125" font-size="26" font-weight="900" fill="#111" font-family="sans-serif">123</text>
+  <text x="592" y="470" font-size="24" font-weight="900" fill="#111" font-family="sans-serif">×+?</text>
+  <path d="M868,28 C868,21 861,17 857,23 C853,17 846,21 846,28 C846,36 857,46 857,46Z" fill="none" stroke="#111" stroke-width="3"/>
+  <line x1="160" y1="196" x2="184" y2="196" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="742" y1="136" x2="766" y2="136" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="500" y1="296" x2="524" y2="296" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="98" y1="436" x2="122" y2="436" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="866" y1="336" x2="890" y2="336" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  <line x1="568" y1="38" width="46" height="32"/>
+  <rect x="568" y="34" width="46" height="32" rx="2" fill="none" stroke="#111" stroke-width="3"/>
+  <polyline points="568,34 591,52 614,34" fill="none" stroke="#111" stroke-width="3"/>
+</svg>
 
-<div id="leaderboard" class="section active"></div>
-<div id="players" class="section"></div>
-<div id="admin" class="section">
-  <div class="admin-wrap">
-    <div id="lock-screen" class="lock-screen">
-      <div style="font-size:40px;margin-bottom:12px">🔒</div>
-      <p>Enter the admin password to add points</p>
-      <input class="pin-input" type="password" id="pin-input" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()"/>
-      <br/><button class="unlock-btn" onclick="unlock()">Unlock</button>
-      <p class="err" id="pin-err"></p>
-    </div>
-    <div id="admin-panel" style="display:none">
-      <p style="text-align:center;font-size:13px;color:#aaa;margin-bottom:14px">Use + / − to update points per player</p>
-      <div class="agrid" id="admin-grid"></div>
-      <div style="text-align:center;margin-top:16px">
-        <button onclick="lock()" style="padding:8px 20px;background:transparent;border:1px solid #444;border-radius:20px;color:#aaa;cursor:pointer;font-size:13px">🔒 Lock</button>
+<div class="wrap">
+  <div class="deco">★ ☽ ★</div>
+  <h1>Elizampionship</h1>
+  <p class="sub">Season 1 — 2026 Edition</p>
+  <div class="tabs">
+    <button class="tab active" onclick="show('lb',this)">🏆 Leaderboard</button>
+    <button class="tab" onclick="show('pl',this)">👥 Players</button>
+    <button class="tab" onclick="show('ad',this)">🔒 Add Points</button>
+    <button class="tab" onclick="show('ru',this)">📋 Rules</button>
+  </div>
+  <div id="lb" class="section active"></div>
+  <div id="pl" class="section"></div>
+  <div id="ad" class="section">
+    <div class="awrap">
+      <div id="lkscr" class="lkscr">
+        <div class="lkico">🔒</div>
+        <p>Admin Password Required</p>
+        <input class="pininp" type="password" id="pininp" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()"/>
+        <button class="ulbtn" onclick="unlock()">Unlock</button>
+        <p class="pinerr" id="pinerr"></p>
+      </div>
+      <div id="adpan" style="display:none">
+        <p style="text-align:center;font-size:12px;font-weight:900;color:#666;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">+ / − to update points</p>
+        <div class="agrid" id="agrid"></div>
+        <button class="lkbtn" onclick="lock()">🔒 Lock Admin</button>
       </div>
     </div>
   </div>
-</div>
-<div id="rules" class="section">
-  <div class="rlist">
-    <div class="rcard"><div class="r-title"><span class="badge">+10</span><span class="r-name">Weekly challenge completed</span></div><p class="r-desc">Complete the assigned weekly challenge and earn 10 points.</p></div>
-    <div class="rcard"><div class="r-title"><span class="badge">+5</span><span class="r-name">KPI target hit</span></div><p class="r-desc">Reach your individual KPI target for the month.</p></div>
-    <div class="rcard"><div class="r-title"><span class="badge">+3</span><span class="r-name">Team collaboration</span></div><p class="r-desc">Cross-team collaboration and support activities.</p></div>
-    <div class="rcard"><div class="r-title"><span class="badge">+2</span><span class="r-name">Learning & development</span></div><p class="r-desc">Complete a learning module or share knowledge with the team.</p></div>
-    <p class="note">More rules coming soon — stay tuned! ★</p>
+  <div id="ru" class="section">
+    <div class="rlist">
+      <div class="rcard rc0"><div class="rtop"><span class="rpts">+10</span><span class="rname">Weekly challenge</span></div><p class="rdesc">Complete the assigned weekly challenge and earn 10 points.</p></div>
+      <div class="rcard rc1"><div class="rtop"><span class="rpts">+5</span><span class="rname">KPI target hit</span></div><p class="rdesc">Reach your individual KPI target for the month.</p></div>
+      <div class="rcard rc2"><div class="rtop"><span class="rpts">+3</span><span class="rname">Team collaboration</span></div><p class="rdesc">Cross-team collaboration and support activities.</p></div>
+      <div class="rcard rc3"><div class="rtop"><span class="rpts">+2</span><span class="rname">Learning & dev</span></div><p class="rdesc">Complete a learning module or share knowledge.</p></div>
+      <p class="rnote">★ More rules coming soon ★</p>
+    </div>
   </div>
 </div>
 
 <script>
 const PASS="Eliz26";
 const teams=[
-  {name:"ROI Rangers",emoji:"📈",light:"#2a2a8e",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
-  {name:"The Converters",emoji:"🔄",light:"#8e2a2a",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
-  {name:"The CTR Crew",emoji:"📊",light:"#2a2a8e",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
-  {name:"Last Mile Legends",emoji:"🚀",light:"#8e2a2a",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
+  {name:"ROI Rangers",emoji:"📈",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
+  {name:"The Converters",emoji:"🔄",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
+  {name:"The CTR Crew",emoji:"📊",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
+  {name:"Last Mile Legends",emoji:"🚀",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
 ];
+const TC=['#e8c84a','#e74c3c','#3498db','#2ecc71'];
+const medals=["🥇","🥈","🥉","4️⃣"];
+const lbIcons=['✓','→','%','★'];
 const pts={};
 teams.forEach(t=>t.members.forEach(m=>pts[m]=0));
-const ini=n=>n.slice(0,2).toUpperCase();
 const tot=t=>t.members.reduce((s,m)=>s+(pts[m]||0),0);
-const ranks=["🥇","🥈","🥉","4️⃣"];
 
+/* ── KEITH HARING FIGURE ───────────────────────────────── */
+const POSES=[
+  ['M30,20 L28,42','M29,27 L13,35 L7,27','M29,27 L45,21 L39,33','M28,42 L16,57 L8,68','M28,42 L40,55 L48,65'],
+  ['M30,20 L30,43','M30,26 L10,13 L4,5','M30,26 L50,13 L56,5','M30,43 L18,59 L12,70','M30,43 L42,59 L48,70'],
+  ['M30,20 L32,42','M31,26 L14,18 L19,10','M31,26 L47,18 L55,10','M32,42 L18,57 L10,68','M32,42 L46,53 L52,64'],
+  ['M31,20 L27,40','M29,27 L13,37 L11,51','M29,27 L43,35 L47,49','M27,40 L19,55 L15,66','M27,40 L37,53 L43,63'],
+  ['M30,20 L30,42','M30,26 L11,31 L5,41','M30,26 L49,19 L59,17','M30,42 L19,57 L13,68','M30,42 L39,55 L45,65'],
+];
+const LIMB_SPARKS=[
+  [[2,43,8,43],[2,36,6,36]],
+  [[2,8,6,5],[54,8,60,5]],
+  [[3,13,7,10],[53,13,60,10]],
+  [[2,40,7,44],[2,51,7,55]],
+  [[57,18,63,18],[2,34,8,34]],
+];
+
+function fig(c,pi,w=44,h=62){
+  const segs=POSES[pi%5];
+  const sparks=LIMB_SPARKS[pi%5];
+  const LW=12,OW=20,HR=9;
+  const blk=segs.map(d=>`<path d="${d}" stroke="#111" stroke-width="${OW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
+  const col=segs.map(d=>`<path d="${d}" stroke="${c}" stroke-width="${LW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
+  const sp=sparks.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>`).join('');
+  return `<svg width="${w}" height="${h}" viewBox="2 8 60 70" style="flex-shrink:0">
+    ${sp}${blk}
+    <circle cx="30" cy="11" r="${HR+4}" fill="#111"/>
+    ${col}
+    <circle cx="30" cy="11" r="${HR}" fill="${c}" stroke="#111" stroke-width="2.5"/>
+  </svg>`;
+}
+
+/* ── CARD BACKGROUND DOODLES ───────────────────────────── */
+function cardBG(){
+  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.14">
+    <circle cx="22" cy="9" r="3" fill="#111"/><circle cx="58" cy="7" r="2.5" fill="#111"/>
+    <circle cx="96" cy="10" r="3" fill="#111"/><circle cx="134" cy="7" r="2.5" fill="#111"/>
+    <circle cx="172" cy="10" r="3" fill="#111"/><circle cx="210" cy="7" r="2.5" fill="#111"/>
+    <circle cx="248" cy="10" r="3" fill="#111"/><circle cx="286" cy="7" r="3" fill="#111"/>
+    <circle cx="324" cy="9" r="2.5" fill="#111"/><circle cx="362" cy="8" r="3" fill="#111"/>
+    <circle cx="400" cy="10" r="2.5" fill="#111"/><circle cx="438" cy="7" r="3" fill="#111"/>
+    <line x1="6" y1="6" x2="14" y2="6" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="6" y1="6" x2="6" y2="14" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="436" y1="6" x2="444" y2="6" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="444" y1="6" x2="444" y2="14" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M40,62 L52,62 L49,58 M52,62 L49,66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M196,60 L208,60 L205,56 M208,60 L205,64" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M352,62 L364,62 L361,58 M364,62 L361,66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="78" y1="57" x2="86" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="86" y1="57" x2="78" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="268" y1="57" x2="276" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="276" y1="57" x2="268" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="422" y1="57" x2="430" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="430" y1="57" x2="422" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M138,55 C138,51 133,49 131,53 C129,49 124,51 124,55 C124,60 131,65 131,65Z" fill="none" stroke="#111" stroke-width="2.5"/>
+    <path d="M316,55 C316,51 311,49 309,53 C307,49 302,51 302,55 C302,60 309,65 309,65Z" fill="none" stroke="#111" stroke-width="2.5"/>
+    <polyline points="0,33 7,27 14,33 21,27 28,33" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="392,33 399,27 406,33 413,27 420,33 427,27 434,33 441,27" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="100" y1="60" x2="112" y2="60" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="178" y1="63" x2="190" y2="63" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="342" y1="60" x2="354" y2="60" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="234" y="67" font-size="12" font-weight="900" fill="#111" font-family="sans-serif">%</text>
+    <line x1="446" y1="33" x2="452" y2="33" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    <line x1="449" y1="30" x2="449" y2="36" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    <line x1="447" y1="31" x2="451" y2="35" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    <line x1="451" y1="31" x2="447" y2="35" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </svg>`;
+}
+
+/* ── SCENE MOTION LAYER ────────────────────────────────── */
+function sceneBG(){
+  const pts2=[
+    [0,16,10,16],[0,26,7,26],[0,44,12,44],
+    [54,10,64,10],[54,50,66,50],
+    [106,20,117,20],[106,46,116,46],
+    [160,13,171,13],[160,40,170,40],
+    [214,23,226,23],[214,53,224,53],
+    [268,16,280,16],[268,42,278,42],
+    [322,10,335,10],[322,48,333,48],
+    [376,20,389,20],[376,46,387,46],
+    [430,14,442,14],[430,50,440,50],
+  ];
+  const marks2=pts2.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`).join('');
+  const dots=[[34,8],[88,36],[142,56],[196,8],[250,58],[304,6],[358,56],[412,28]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#111"/>`).join('');
+  const xs=[[72,26,80,34],[346,26,354,34]].map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2" stroke-linecap="round"/><line x1="${x2}" y1="${y1}" x2="${x1}" y2="${y2}" stroke="#111" stroke-width="2" stroke-linecap="round"/>`).join('');
+  const zz=`<polyline points="0,63 7,56 14,63 21,56 28,63" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="408,63 415,56 422,63 429,56 436,63" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const corners=`<line x1="4" y1="4" x2="12" y2="4" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="4" y2="12" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="432" y1="4" x2="440" y2="4" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="440" y1="4" x2="440" y2="12" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`;
+  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.2">${marks2}${dots}${xs}${zz}${corners}</svg>`;
+}
+
+/* ── BURST AROUND MEDAL ────────────────────────────────── */
+function burst(n=10,r1=22,r2=32){
+  return Array.from({length:n},(_,i)=>{
+    const a=(i/n)*Math.PI*2,cos=Math.cos(a),sin=Math.sin(a);
+    return `<line x1="${(36+cos*r1).toFixed(1)}" y1="${(36+sin*r1).toFixed(1)}" x2="${(36+cos*r2).toFixed(1)}" y2="${(36+sin*r2).toFixed(1)}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`;
+  }).join('');
+}
+
+function vibLines(side){
+  const xs=side==='L'?[0,0,0]:[12,12,12], ys=[10,22,34], x2s=side==='L'?[8,6,9]:[4,6,3];
+  return xs.map((_,i)=>`<line x1="${xs[i]}" y1="${ys[i]}" x2="${x2s[i]}" y2="${ys[i]}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>`).join('');
+}
+
+/* ── RENDER LEADERBOARD ────────────────────────────────── */
 function renderLB(){
-  const s=[...teams].sort((a,b)=>tot(b)-tot(a));
-  const mx=Math.max(...s.map(t=>tot(t)),1);
-  document.getElementById("leaderboard").innerHTML='<div class="board">'+
-    s.map((t,i)=>{
-      const total=tot(t);
-      const chips=t.members.map(m=>`<div class="p-chip">
-        <div class="avatar-sm" style="background:${t.light}">${ini(m)}</div>
-        <span class="p-chip-name">${m}</span>
-        <span class="p-chip-pts">${pts[m]||0}</span>
-      </div>`).join('');
-      return`<div class="team-card">
-        <div class="team-top">
-          <div class="rank">${ranks[i]}</div>
-          <div class="t-info">
-            <div class="t-name">${t.emoji} ${t.name}</div>
-            <div class="t-mem">${t.members.length} members</div>
-            <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(total/mx*100)}%"></div></div>
-          </div>
-          <div class="t-score">${total}</div>
+  const s=[...teams].map((t,oi)=>({...t,oi})).sort((a,b)=>tot(b)-tot(a));
+  document.getElementById("lb").innerHTML='<div class="board">'+s.map((t,i)=>{
+    const c=TC[t.oi];
+    const figs=t.members.map((_,mi)=>fig(c,mi)).join('');
+    const roughLine=`<svg class="underline-rough" viewBox="0 0 200 5" preserveAspectRatio="none"><path d="M0,3 Q25,1 50,4 Q80,6 110,3 Q140,1 170,4 Q185,5 200,3" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+    const medalSvg=`<svg width="72" height="72" viewBox="0 0 72 72" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0">${burst()}</svg>`;
+    const vibL=`<svg width="14" height="48" viewBox="0 0 14 48" style="position:absolute;right:100%;top:50%;transform:translateY(-50%)">${vibLines('L')}</svg>`;
+    const vibR=`<svg width="14" height="48" viewBox="0 0 14 48" style="position:absolute;left:100%;top:50%;transform:translateY(-50%)">${vibLines('R')}</svg>`;
+    return `<div class="tc">${cardBG()}
+      <div class="lb-row">
+        <div class="medal" style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;position:relative">
+          ${medalSvg}<span style="position:relative;z-index:1;font-size:26px">${medals[i]}</span>
         </div>
-        <div class="players-row">${chips}</div>
-      </div>`;
-    }).join('')+'</div>';
+        <div class="namebox">
+          <div class="tname">${t.emoji} ${t.name}</div>
+          ${roughLine}
+          <div class="tsub">· ${t.members.length} members ·</div>
+        </div>
+        <div class="scorebox" style="position:relative">
+          ${vibL}${vibR}
+          <span class="score">${tot(t)}</span>
+          <span class="spts">pts</span>
+        </div>
+      </div>
+      <div class="figrow">${sceneBG()}${figs}</div>
+    </div>`;
+  }).join('')+'</div>';
 }
 
-function renderPlayers(){
-  document.getElementById("players").innerHTML=
-    teams.map(t=>`<div class="team-section">
-      <div class="team-header">${t.emoji} ${t.name}</div>
-      <table class="ptable">
-        <thead><tr><th>Player</th><th>Points</th></tr></thead>
-        <tbody>${t.members.map(m=>`<tr>
-          <td><div style="display:flex;align-items:center;gap:8px">
-            <div class="avatar-sm" style="background:${t.light}">${ini(m)}</div>${m}
-          </div></td>
-          <td style="color:#e8c84a;font-weight:700">${pts[m]||0}</td>
-        </tr>`).join('')}</tbody>
-      </table>
-    </div>`).join('');
+/* ── RENDER PLAYERS ────────────────────────────────────── */
+function renderPL(){
+  document.getElementById("pl").innerHTML=teams.map((t,ti)=>`<div class="tblock">
+    <div class="tlabel tl${ti}">
+      <div class="lico">${lbIcons[ti]}</div>${t.emoji} ${t.name}
+    </div>
+    <div class="pgrid">${t.members.map((m,mi)=>`<div class="pchip pc${ti}">
+      ${fig(TC[ti],mi,58,72)}
+      <div class="pname">${m}</div>
+      <div class="ppts">${pts[m]||0}</div>
+    </div>`).join('')}</div>
+  </div>`).join('');
 }
 
-function renderAdmin(){
-  document.getElementById("admin-grid").innerHTML=
-    teams.flatMap(t=>t.members.map(m=>`<div class="acard">
-      <div class="avatar-sm" style="background:${t.light};width:32px;height:32px;font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${ini(m)}</div>
-      <div class="a-name">${m}</div>
-      <button class="btn" onclick="ch('${m}',-1)">−</button>
-      <div class="a-pts" id="ap-${m}">${pts[m]||0}</div>
-      <button class="btn" onclick="ch('${m}',1)">+</button>
-    </div>`)).join('');
+/* ── RENDER ADMIN ──────────────────────────────────────── */
+function renderAD(){
+  document.getElementById("agrid").innerHTML=teams.flatMap((t,ti)=>t.members.map(m=>`<div class="acard">
+    <div style="width:26px;height:26px;border-radius:50%;background:${TC[ti]};border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;color:#111">${m.slice(0,2).toUpperCase()}</div>
+    <div class="aname">${m}</div>
+    <button class="abtn" onclick="ch('${m}',-1)">−</button>
+    <div class="apts" id="ap-${m}">${pts[m]||0}</div>
+    <button class="abtn" onclick="ch('${m}',1)">+</button>
+  </div>`)).join('');
 }
 
 function ch(name,delta){
   pts[name]=Math.max(0,(pts[name]||0)+delta);
   const el=document.getElementById("ap-"+name);
   if(el)el.textContent=pts[name];
-  renderLB();renderPlayers();
+  renderLB();renderPL();
 }
 
 function unlock(){
-  const v=document.getElementById("pin-input").value;
-  if(v===PASS){
-    document.getElementById("lock-screen").style.display="none";
-    document.getElementById("admin-panel").style.display="block";
-    renderAdmin();
-  } else {
-    document.getElementById("pin-err").textContent="❌ Wrong password. Try again.";
-    document.getElementById("pin-input").value="";
+  if(document.getElementById("pininp").value===PASS){
+    document.getElementById("lkscr").style.display="none";
+    document.getElementById("adpan").style.display="block";
+    renderAD();
+  }else{
+    document.getElementById("pinerr").textContent="❌ Wrong password!";
+    document.getElementById("pininp").value="";
   }
 }
 
 function lock(){
-  document.getElementById("lock-screen").style.display="block";
-  document.getElementById("admin-panel").style.display="none";
-  document.getElementById("pin-input").value="";
-  document.getElementById("pin-err").textContent="";
+  document.getElementById("lkscr").style.display="block";
+  document.getElementById("adpan").style.display="none";
+  document.getElementById("pininp").value="";
+  document.getElementById("pinerr").textContent="";
 }
 
 function show(id,el){
@@ -207,11 +364,11 @@ function show(id,el){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   el.classList.add("active");
-  if(id==="leaderboard")renderLB();
-  if(id==="players")renderPlayers();
+  if(id==="lb")renderLB();
+  if(id==="pl")renderPL();
 }
 
-renderLB();renderPlayers();
+renderLB();renderPL();
 </script>
 </body>
 </html>
