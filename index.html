@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Elizampionship 🏆</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:sans-serif;background:#0a0a2e;color:#fff;min-height:100vh;padding:20px}
+h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px}
+.sub{text-align:center;font-size:13px;color:#aaa;margin-bottom:20px}
+.deco{text-align:center;font-size:22px;letter-spacing:8px;margin-bottom:8px;color:#c0392b}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:8px 20px;border-radius:20px;border:1px solid #444;font-size:13px;cursor:pointer;background:transparent;color:#aaa;transition:all .2s}
+.tab.active{background:#c0392b;color:#fff;border-color:#c0392b}
+.section{display:none}
+.section.active{display:block}
+
+/* Leaderboard */
+.board{display:flex;flex-direction:column;gap:10px;max-width:600px;margin:0 auto}
+.team-card{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:16px}
+.rank{font-size:24px;min-width:40px}
+.t-info{flex:1}
+.t-name{font-size:15px;font-weight:600;color:#fff}
+.t-mem{font-size:12px;color:#888;margin-bottom:6px}
+.bar-bg{height:6px;background:#1a1a4e;border-radius:3px}
+.bar-fill{height:6px;border-radius:3px;background:linear-gradient(90deg,#1a1a9e,#c0392b);transition:width .5s}
+.t-score{font-size:28px;font-weight:700;color:#e8c84a}
+
+/* Players */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;max-width:700px;margin:0 auto}
+.pcard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px;text-align:center}
+.avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;margin:0 auto 8px}
+.p-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:2px}
+.p-team{font-size:11px;color:#888;margin-bottom:8px}
+.p-pts{font-size:26px;font-weight:700;color:#e8c84a}
+.p-lbl{font-size:11px;color:#888}
+
+/* Admin */
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;max-width:700px;margin:0 auto}
+.acard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.a-name{flex:1;font-size:14px;font-weight:500;color:#fff}
+.a-pts{font-size:18px;font-weight:700;color:#e8c84a;min-width:36px;text-align:center}
+.btn{width:30px;height:30px;border-radius:50%;border:1px solid #444;background:#1a1a4e;cursor:pointer;font-size:18px;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:#c0392b;border-color:#c0392b}
+
+/* Rules */
+.rlist{display:flex;flex-direction:column;gap:10px;max-width:600px;margin:0 auto}
+.rcard{background:#12124a;border:1px solid #2a2a6e;border-radius:12px;padding:14px 18px}
+.r-title{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.badge{background:#c0392b;color:#fff;font-size:12px;padding:2px 10px;border-radius:10px;font-weight:600}
+.r-name{font-size:14px;font-weight:600;color:#fff}
+.r-desc{font-size:13px;color:#aaa;line-height:1.6}
+.note{text-align:center;font-size:12px;color:#666;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="deco">★ ☽ ★</div>
+<h1>Elizampionship</h1>
+<p class="sub">Season 1 — 2026 Edition</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('leaderboard',this)">Leaderboard</button>
+  <button class="tab" onclick="show('players',this)">Players</button>
+  <button class="tab" onclick="show('admin',this)">Add Points</button>
+  <button class="tab" onclick="show('rules',this)">Rules</button>
+</div>
+
+<div id="leaderboard" class="section active"></div>
+<div id="players" class="section"></div>
+<div id="admin" class="section">
+  <p style="text-align:center;font-size:13px;color:#888;margin-bottom:14px">Use + / − to update points per player</p>
+  <div class="agrid" id="admin-grid"></div>
+</div>
+<div id="rules" class="section">
+  <div class="rlist">
+    <div class="rcard"><div class="r-title"><span class="badge">+10</span><span class="r-name">Weekly challenge completed</span></div><p class="r-desc">Complete the assigned weekly challenge and earn 10 points.</p></div>
+    <div class="rcard"><div class="r-title"><span class="badge">+5</span><span class="r-name">KPI target hit</span></div><p class="r-desc">Reach your individual KPI target for the month.</p></div>
+    <div class="rcard"><div class="r-title"><span class="badge">+3</span><span class="r-name">Team collaboration</span></div><p class="r-desc">Cross-team collaboration and support activities.</p></div>
+    <div class="rcard"><div class="r-title"><span class="badge">+2</span><span class="r-name">Learning & development</span></div><p class="r-desc">Complete a learning module or share knowledge with the team.</p></div>
+    <p class="note">More rules coming soon — stay tuned! ★</p>
+  </div>
+</div>
+
+<script>
+const teams=[
+  {name:"ROI Rangers",emoji:"📈",bg:"#1a1a6e",light:"#2a2a8e",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
+  {name:"The Converters",emoji:"🔄",bg:"#6e1a1a",light:"#8e2a2a",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
+  {name:"The CTR Crew",emoji:"📊",bg:"#1a1a6e",light:"#2a2a8e",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
+  {name:"Last Mile Legends",emoji:"🚀",bg:"#6e1a1a",light:"#8e2a2a",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
+];
+const pts={};
+teams.forEach(t=>t.members.forEach(m=>pts[m]=0));
+const ini=n=>n.slice(0,2).toUpperCase();
+const tot=t=>t.members.reduce((s,m)=>s+(pts[m]||0),0);
+const ranks=["🥇","🥈","🥉","4️⃣"];
+
+function renderLB(){
+  const s=[...teams].sort((a,b)=>tot(b)-tot(a));
+  const mx=Math.max(...s.map(t=>tot(t)),1);
+  document.getElementById("leaderboard").innerHTML='<div class="board">'+
+    s.map((t,i)=>{const total=tot(t);return`<div class="team-card">
+      <div class="rank">${ranks[i]}</div>
+      <div class="t-info">
+        <div class="t-name">${t.emoji} ${t.name}</div>
+        <div class="t-mem">${t.members.length} members</div>
+        <div class="bar-bg"><div class="bar-fill" style="width:${Math.round(total/mx*100)}%"></div></div>
+      </div>
+      <div class="t-score">${total}</div>
+    </div>`;}).join('')+'</div>';
+}
+
+function renderPlayers(){
+  document.getElementById("players").innerHTML='<div class="pgrid">'+
+    teams.flatMap(t=>t.members.map(m=>`<div class="pcard">
+      <div class="avatar" style="background:${t.light}">${ini(m)}</div>
+      <div class="p-name">${m}</div>
+      <div class="p-team">${t.name}</div>
+      <div class="p-pts">${pts[m]||0}</div>
+      <div class="p-lbl">pts</div>
+    </div>`)).join('')+'</div>';
+}
+
+function renderAdmin(){
+  document.getElementById("admin-grid").innerHTML=
+    teams.flatMap(t=>t.members.map(m=>`<div class="acard">
+      <div class="avatar" style="background:${t.light};width:32px;height:32px;font-size:11px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">${ini(m)}</div>
+      <div class="a-name">${m}</div>
+      <button class="btn" onclick="ch('${m}',-1)">−</button>
+      <div class="a-pts" id="ap-${m}">${pts[m]||0}</div>
+      <button class="btn" onclick="ch('${m}',1)">+</button>
+    </div>`)).join('');
+}
+
+function ch(name,delta){
+  pts[name]=Math.max(0,(pts[name]||0)+delta);
+  const el=document.getElementById("ap-"+name);
+  if(el)el.textContent=pts[name];
+  renderLB();renderPlayers();
+}
+
+function show(id,el){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  el.classList.add("active");
+  if(id==="leaderboard")renderLB();
+  if(id==="players")renderPlayers();
+  if(id==="admin")renderAdmin();
+}
+
+renderLB();renderPlayers();renderAdmin();
+</script>
+</body>
+</html>
