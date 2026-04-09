@@ -86,7 +86,7 @@ h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px
     <div id="lock-screen" class="lock-screen">
       <div style="font-size:40px;margin-bottom:12px">🔒</div>
       <p>Enter the admin password to add points</p>
-      <input class="pin-input" type="password" id="pin-input" placeholder="••••" maxlength="6" onkeydown="if(event.key==='Enter')unlock()"/>
+      <input class="pin-input" type="password" id="pin-input" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()"/>
       <br/><button class="unlock-btn" onclick="unlock()">Unlock</button>
       <p class="err" id="pin-err"></p>
     </div>
@@ -110,7 +110,7 @@ h1{text-align:center;font-size:28px;font-weight:600;color:#fff;margin-bottom:4px
 </div>
 
 <script>
-const PASS="eliz2026";
+const PASS="Eliz26";
 const teams=[
   {name:"ROI Rangers",emoji:"📈",light:"#2a2a8e",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
   {name:"The Converters",emoji:"🔄",light:"#8e2a2a",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
