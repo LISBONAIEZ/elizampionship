@@ -171,8 +171,14 @@ const teams=[
 const TC=['#e8c84a','#e74c3c','#3498db','#2ecc71'];
 const medals=["🥇","🥈","🥉","4️⃣"];
 const lbIcons=['✓','→','%','★'];
+// Load saved points from localStorage or start at 0
+const saved = JSON.parse(localStorage.getItem('elizaPts')||'{}');
 const pts={};
-teams.forEach(t=>t.members.forEach(m=>pts[m]=0));
+teams.forEach(t=>t.members.forEach(m=>pts[m]=saved[m]||0));
+
+function savePts(){
+  localStorage.setItem('elizaPts', JSON.stringify(pts));
+}
 const tot=t=>t.members.reduce((s,m)=>s+(pts[m]||0),0);
 
 /* ── KEITH HARING FIGURE ───────────────────────────────── */
@@ -339,6 +345,7 @@ function renderAD(){
 
 function ch(name,delta){
   pts[name]=Math.max(0,(pts[name]||0)+delta);
+  savePts();
   const el=document.getElementById("ap-"+name);
   if(el)el.textContent=pts[name];
   renderLB();renderPL();
