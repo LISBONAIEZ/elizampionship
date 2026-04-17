@@ -1,8 +1,3 @@
-<script>
-const SUPABASE_URL  = 'https://aufnqfautulphmgugnqx.supabase.co'        // ← your project URL
-const SUPABASE_ANON = 'sb_publishable_1mkPLWRGN1kGbVQkRLAGNA_uJ-auB2q'       // ← your anon key
-<script>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +18,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .tab:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #111}
 .tab.active{transform:translate(4px,4px);box-shadow:0 0 0 #111;background:#111;color:#fff}
 .section{display:none}.section.active{display:block}
-
-/* LEADERBOARD */
 .board{display:flex;flex-direction:column;gap:12px;max-width:660px;margin:0 auto}
 .tc{background:#fff;border:5px solid #111;box-shadow:7px 7px 0 #111;padding:10px 12px;position:relative;overflow:hidden}
 .lb-row{display:flex;align-items:center;gap:10px;position:relative;z-index:2}
@@ -38,8 +31,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .score{font-family:'Permanent Marker',cursive;font-size:30px;color:#111;display:block;line-height:1;font-style:italic}
 .spts{font-size:9px;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:1px}
 .figrow{display:flex;align-items:flex-end;gap:2px;border-top:3px solid #111;margin-top:8px;padding-top:4px;position:relative;min-height:66px;overflow:hidden}
-
-/* PLAYERS */
 .tblock{max-width:700px;margin:0 auto 22px}
 .tlabel{font-family:'Permanent Marker',cursive;font-size:17px;margin-bottom:12px;padding:8px 16px 8px 10px;border:5px solid #111;display:inline-flex;align-items:center;gap:9px;box-shadow:6px 6px 0 #111;font-style:italic;letter-spacing:1px;color:#111}
 .tl0{background:#e8c84a}.tl1{background:#e74c3c;color:#fff}.tl2{background:#3498db;color:#fff}.tl3{background:#2ecc71}
@@ -50,8 +41,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .pc0{background:#fffbe6}.pc1{background:#fde8e8}.pc2{background:#e8f4fd}.pc3{background:#e8fdf0}
 .pname{font-size:12px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:2px}
 .ppts{font-family:'Permanent Marker',cursive;font-size:24px;color:#111;line-height:1;font-style:italic}
-
-/* ADMIN */
 .awrap{max-width:700px;margin:0 auto}
 .lkscr{text-align:center;padding:40px 20px}
 .lkico{font-size:56px;margin-bottom:14px}
@@ -67,8 +56,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .abtn{width:28px;height:28px;border:3px solid #111;background:#fff;cursor:pointer;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #111;font-family:'Nunito',sans-serif;color:#111}
 .abtn:hover{background:#e8c84a}
 .lkbtn{margin:18px auto 0;display:block;padding:8px 22px;background:#fff;border:3px solid #111;font-size:12px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;box-shadow:3px 3px 0 #111;font-family:'Nunito',sans-serif;color:#111}
-
-/* RULES */
 .rlist{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
 .rcard{border:5px solid #111;padding:14px 18px;box-shadow:6px 6px 0 #111}
 .rc0{background:#e8c84a}.rc1{background:#e74c3c;color:#fff}.rc2{background:#3498db;color:#fff}.rc3{background:#2ecc71}
@@ -77,11 +64,15 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .rname{font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:1px}
 .rdesc{font-size:13px;font-weight:700;opacity:0.85;line-height:1.5}
 .rnote{text-align:center;font-size:11px;font-weight:900;color:#888;margin-top:12px;text-transform:uppercase;letter-spacing:2px}
+/* sync status */
+#sync-status{text-align:center;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px;margin-bottom:10px;color:#888}
+#sync-status.ok{color:#2ecc71}
+#sync-status.err{color:#e74c3c}
+#sync-status.loading{color:#e8c84a}
 </style>
 </head>
 <body>
 
-<!-- GLOBAL DOODLE BACKGROUND -->
 <svg id="bg-svg" xmlns="http://www.w3.org/2000/svg">
   <path d="M55,28 C55,18 45,13 40,20 C35,13 25,18 25,28 C25,38 40,50 40,50Z" fill="none" stroke="#111" stroke-width="3"/>
   <circle cx="115" cy="55" r="25" fill="none" stroke="#111" stroke-width="3"/>
@@ -118,7 +109,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
   <line x1="500" y1="296" x2="524" y2="296" stroke="#111" stroke-width="3" stroke-linecap="round"/>
   <line x1="98" y1="436" x2="122" y2="436" stroke="#111" stroke-width="3" stroke-linecap="round"/>
   <line x1="866" y1="336" x2="890" y2="336" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  <line x1="568" y1="38" width="46" height="32"/>
   <rect x="568" y="34" width="46" height="32" rx="2" fill="none" stroke="#111" stroke-width="3"/>
   <polyline points="568,34 591,52 614,34" fill="none" stroke="#111" stroke-width="3"/>
 </svg>
@@ -127,6 +117,7 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
   <div class="deco">★ ☽ ★</div>
   <h1>Elizampionship</h1>
   <p class="sub">Season 1 — 2026 Edition</p>
+  <div id="sync-status" class="loading">⏳ Loading scores...</div>
   <div class="tabs">
     <button class="tab active" onclick="show('lb',this)">🏆 Leaderboard</button>
     <button class="tab" onclick="show('pl',this)">👥 Players</button>
@@ -165,28 +156,54 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
   </div>
 </div>
 
-<script>
-const PASS="Eliz26";
-const teams=[
-  {name:"ROI Rangers",emoji:"📈",members:["Jennifer","Roberto","Atea","Sara","Artem"]},
-  {name:"The Converters",emoji:"🔄",members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
-  {name:"The CTR Crew",emoji:"📊",members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
-  {name:"Last Mile Legends",emoji:"🚀",members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
+<script type="module">
+// ── SUPABASE ────────────────────────────────────────────
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+const SUPABASE_URL  = 'https://aufnqfautulphmgugnqx.supabase.co';
+const SUPABASE_ANON = 'sb_publishable_1mkPLWRGN1kGbVQkRLAGNA_uJ-auB2q';
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+const PASS  = "Eliz26";
+const teams = [
+  {name:"ROI Rangers",      emoji:"📈", members:["Jennifer","Roberto","Atea","Sara","Artem"]},
+  {name:"The Converters",   emoji:"🔄", members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
+  {name:"The CTR Crew",     emoji:"📊", members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
+  {name:"Last Mile Legends",emoji:"🚀", members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
 ];
-const TC=['#e8c84a','#e74c3c','#3498db','#2ecc71'];
-const medals=["🥇","🥈","🥉","4️⃣"];
-const lbIcons=['✓','→','%','★'];
-// Load saved points from localStorage or start at 0
-const saved = JSON.parse(localStorage.getItem('elizaPts')||'{}');
-const pts={};
-teams.forEach(t=>t.members.forEach(m=>pts[m]=saved[m]||0));
+const TC      = ['#e8c84a','#e74c3c','#3498db','#2ecc71'];
+const medals  = ["🥇","🥈","🥉","4️⃣"];
+const lbIcons = ['✓','→','%','★'];
+const pts     = {};
+teams.forEach(t => t.members.forEach(m => pts[m] = 0));
 
-function savePts(){
-  localStorage.setItem('elizaPts', JSON.stringify(pts));
+// ── STATUS HELPER ───────────────────────────────────────
+function setStatus(msg, cls=''){
+  const el = document.getElementById('sync-status');
+  el.textContent = msg;
+  el.className = cls;
 }
-const tot=t=>t.members.reduce((s,m)=>s+(pts[m]||0),0);
 
-/* ── KEITH HARING FIGURE ───────────────────────────────── */
+// ── LOAD FROM SUPABASE ──────────────────────────────────
+async function loadPts(){
+  setStatus('⏳ Loading scores...','loading');
+  const {data, error} = await sb.from('scores').select('name, points');
+  if(error){ setStatus('⚠️ Could not load scores','err'); return; }
+  data.forEach(row => { if(pts.hasOwnProperty(row.name)) pts[row.name] = row.points; });
+  setStatus('✓ Live scores','ok');
+  renderLB(); renderPL();
+}
+
+// ── SAVE TO SUPABASE ────────────────────────────────────
+async function savePt(name, value){
+  setStatus('⏳ Saving...','loading');
+  const {error} = await sb.from('scores')
+    .upsert({name, points: value}, {onConflict:'name'});
+  if(error){ setStatus('⚠️ Save failed','err'); }
+  else { setStatus('✓ Saved','ok'); }
+}
+
+// ── FIGURES & BACKGROUNDS (unchanged visuals) ───────────
 const POSES=[
   ['M30,20 L28,42','M29,27 L13,35 L7,27','M29,27 L45,21 L39,33','M28,42 L16,57 L8,68','M28,42 L40,55 L48,65'],
   ['M30,20 L30,43','M30,26 L10,13 L4,5','M30,26 L50,13 L56,5','M30,43 L18,59 L12,70','M30,43 L42,59 L48,70'],
@@ -195,29 +212,18 @@ const POSES=[
   ['M30,20 L30,42','M30,26 L11,31 L5,41','M30,26 L49,19 L59,17','M30,42 L19,57 L13,68','M30,42 L39,55 L45,65'],
 ];
 const LIMB_SPARKS=[
-  [[2,43,8,43],[2,36,6,36]],
-  [[2,8,6,5],[54,8,60,5]],
-  [[3,13,7,10],[53,13,60,10]],
-  [[2,40,7,44],[2,51,7,55]],
-  [[57,18,63,18],[2,34,8,34]],
+  [[2,43,8,43],[2,36,6,36]],[[2,8,6,5],[54,8,60,5]],[[3,13,7,10],[53,13,60,10]],
+  [[2,40,7,44],[2,51,7,55]],[[57,18,63,18],[2,34,8,34]],
 ];
 
 function fig(c,pi,w=44,h=62){
-  const segs=POSES[pi%5];
-  const sparks=LIMB_SPARKS[pi%5];
-  const LW=12,OW=20,HR=9;
+  const segs=POSES[pi%5], sparks=LIMB_SPARKS[pi%5], LW=12,OW=20,HR=9;
   const blk=segs.map(d=>`<path d="${d}" stroke="#111" stroke-width="${OW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
   const col=segs.map(d=>`<path d="${d}" stroke="${c}" stroke-width="${LW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
   const sp=sparks.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>`).join('');
-  return `<svg width="${w}" height="${h}" viewBox="2 8 60 70" style="flex-shrink:0">
-    ${sp}${blk}
-    <circle cx="30" cy="11" r="${HR+4}" fill="#111"/>
-    ${col}
-    <circle cx="30" cy="11" r="${HR}" fill="${c}" stroke="#111" stroke-width="2.5"/>
-  </svg>`;
+  return `<svg width="${w}" height="${h}" viewBox="2 8 60 70" style="flex-shrink:0">${sp}${blk}<circle cx="30" cy="11" r="${HR+4}" fill="#111"/>${col}<circle cx="30" cy="11" r="${HR}" fill="${c}" stroke="#111" stroke-width="2.5"/></svg>`;
 }
 
-/* ── CARD BACKGROUND DOODLES ───────────────────────────── */
 function cardBG(){
   return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.14">
     <circle cx="22" cy="9" r="3" fill="#111"/><circle cx="58" cy="7" r="2.5" fill="#111"/>
@@ -231,55 +237,22 @@ function cardBG(){
     <line x1="436" y1="6" x2="444" y2="6" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="444" y1="6" x2="444" y2="14" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <path d="M40,62 L52,62 L49,58 M52,62 L49,66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M196,60 L208,60 L205,56 M208,60 L205,64" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M352,62 L364,62 L361,58 M364,62 L361,66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <line x1="78" y1="57" x2="86" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="86" y1="57" x2="78" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="268" y1="57" x2="276" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="276" y1="57" x2="268" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="422" y1="57" x2="430" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="430" y1="57" x2="422" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <path d="M138,55 C138,51 133,49 131,53 C129,49 124,51 124,55 C124,60 131,65 131,65Z" fill="none" stroke="#111" stroke-width="2.5"/>
-    <path d="M316,55 C316,51 311,49 309,53 C307,49 302,51 302,55 C302,60 309,65 309,65Z" fill="none" stroke="#111" stroke-width="2.5"/>
     <polyline points="0,33 7,27 14,33 21,27 28,33" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <polyline points="392,33 399,27 406,33 413,27 420,33 427,27 434,33 441,27" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <line x1="100" y1="60" x2="112" y2="60" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="178" y1="63" x2="190" y2="63" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="342" y1="60" x2="354" y2="60" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <text x="234" y="67" font-size="12" font-weight="900" fill="#111" font-family="sans-serif">%</text>
-    <line x1="446" y1="33" x2="452" y2="33" stroke="#111" stroke-width="2" stroke-linecap="round"/>
-    <line x1="449" y1="30" x2="449" y2="36" stroke="#111" stroke-width="2" stroke-linecap="round"/>
-    <line x1="447" y1="31" x2="451" y2="35" stroke="#111" stroke-width="2" stroke-linecap="round"/>
-    <line x1="451" y1="31" x2="447" y2="35" stroke="#111" stroke-width="2" stroke-linecap="round"/>
   </svg>`;
 }
 
-/* ── SCENE MOTION LAYER ────────────────────────────────── */
 function sceneBG(){
-  const pts2=[
-    [0,16,10,16],[0,26,7,26],[0,44,12,44],
-    [54,10,64,10],[54,50,66,50],
-    [106,20,117,20],[106,46,116,46],
-    [160,13,171,13],[160,40,170,40],
-    [214,23,226,23],[214,53,224,53],
-    [268,16,280,16],[268,42,278,42],
-    [322,10,335,10],[322,48,333,48],
-    [376,20,389,20],[376,46,387,46],
-    [430,14,442,14],[430,50,440,50],
-  ];
+  const pts2=[[0,16,10,16],[0,26,7,26],[0,44,12,44],[54,10,64,10],[54,50,66,50],[106,20,117,20],[106,46,116,46],[160,13,171,13],[160,40,170,40],[214,23,226,23],[214,53,224,53],[268,16,280,16],[268,42,278,42],[322,10,335,10],[322,48,333,48],[376,20,389,20],[376,46,387,46],[430,14,442,14],[430,50,440,50]];
   const marks2=pts2.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`).join('');
   const dots=[[34,8],[88,36],[142,56],[196,8],[250,58],[304,6],[358,56],[412,28]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#111"/>`).join('');
-  const xs=[[72,26,80,34],[346,26,354,34]].map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2" stroke-linecap="round"/><line x1="${x2}" y1="${y1}" x2="${x1}" y2="${y2}" stroke="#111" stroke-width="2" stroke-linecap="round"/>`).join('');
-  const zz=`<polyline points="0,63 7,56 14,63 21,56 28,63" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <polyline points="408,63 415,56 422,63 429,56 436,63" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const corners=`<line x1="4" y1="4" x2="12" y2="4" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="4" y1="4" x2="4" y2="12" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="432" y1="4" x2="440" y2="4" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="440" y1="4" x2="440" y2="12" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`;
-  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.2">${marks2}${dots}${xs}${zz}${corners}</svg>`;
+  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.2">${marks2}${dots}</svg>`;
 }
 
-/* ── BURST AROUND MEDAL ────────────────────────────────── */
 function burst(n=10,r1=22,r2=32){
   return Array.from({length:n},(_,i)=>{
     const a=(i/n)*Math.PI*2,cos=Math.cos(a),sin=Math.sin(a);
@@ -292,7 +265,9 @@ function vibLines(side){
   return xs.map((_,i)=>`<line x1="${xs[i]}" y1="${ys[i]}" x2="${x2s[i]}" y2="${ys[i]}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>`).join('');
 }
 
-/* ── RENDER LEADERBOARD ────────────────────────────────── */
+const tot = t => t.members.reduce((s,m) => s + (pts[m]||0), 0);
+
+// ── RENDER LEADERBOARD ──────────────────────────────────
 function renderLB(){
   const s=[...teams].map((t,oi)=>({...t,oi})).sort((a,b)=>tot(b)-tot(a));
   document.getElementById("lb").innerHTML='<div class="board">'+s.map((t,i)=>{
@@ -323,7 +298,7 @@ function renderLB(){
   }).join('')+'</div>';
 }
 
-/* ── RENDER PLAYERS ────────────────────────────────────── */
+// ── RENDER PLAYERS ──────────────────────────────────────
 function renderPL(){
   document.getElementById("pl").innerHTML=teams.map((t,ti)=>`<div class="tblock">
     <div class="tlabel tl${ti}">
@@ -337,7 +312,7 @@ function renderPL(){
   </div>`).join('');
 }
 
-/* ── RENDER ADMIN ──────────────────────────────────────── */
+// ── RENDER ADMIN ────────────────────────────────────────
 function renderAD(){
   document.getElementById("agrid").innerHTML=teams.flatMap((t,ti)=>t.members.map(m=>`<div class="acard">
     <div style="width:26px;height:26px;border-radius:50%;background:${TC[ti]};border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;color:#111">${m.slice(0,2).toUpperCase()}</div>
@@ -348,42 +323,48 @@ function renderAD(){
   </div>`)).join('');
 }
 
-function ch(name,delta){
-  pts[name]=Math.max(0,(pts[name]||0)+delta);
-  savePts();
-  const el=document.getElementById("ap-"+name);
-  if(el)el.textContent=pts[name];
-  renderLB();renderPL();
-}
+// ── CHANGE POINTS ───────────────────────────────────────
+window.ch = async function(name, delta){
+  pts[name] = Math.max(0, (pts[name]||0) + delta);
+  const el = document.getElementById("ap-"+name);
+  if(el) el.textContent = pts[name];
+  renderLB(); renderPL();
+  await savePt(name, pts[name]);
+};
 
-function unlock(){
-  if(document.getElementById("pininp").value===PASS){
+// ── AUTH ────────────────────────────────────────────────
+window.unlock = function(){
+  if(document.getElementById("pininp").value === PASS){
     document.getElementById("lkscr").style.display="none";
     document.getElementById("adpan").style.display="block";
     renderAD();
-  }else{
+  } else {
     document.getElementById("pinerr").textContent="❌ Wrong password!";
     document.getElementById("pininp").value="";
   }
-}
+};
 
-function lock(){
+window.lock = function(){
   document.getElementById("lkscr").style.display="block";
   document.getElementById("adpan").style.display="none";
   document.getElementById("pininp").value="";
   document.getElementById("pinerr").textContent="";
-}
+};
 
-function show(id,el){
+window.show = function(id, el){
   document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   el.classList.add("active");
-  if(id==="lb")renderLB();
-  if(id==="pl")renderPL();
-}
+  if(id==="lb") renderLB();
+  if(id==="pl") renderPL();
+};
 
-renderLB();renderPL();
+// ── INIT ────────────────────────────────────────────────
+await loadPts();
+
+// ── AUTO-REFRESH every 30s ──────────────────────────────
+setInterval(loadPts, 30000);
 </script>
 </body>
 </html>
