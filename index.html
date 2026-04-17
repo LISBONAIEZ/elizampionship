@@ -164,7 +164,13 @@ const SUPABASE_URL  = 'https://aufnqfautulphmgugnqx.supabase.co';
 const SUPABASE_ANON = 'sb_publishable_1mkPLWRGN1kGbVQkRLAGNA_uJ-auB2q';
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-const PASS  = "Eliz26";
+// Password is never stored in plain text — only its SHA-256 hash
+const PASS_HASH = "65ad8c3943083ff0b218579bae922c40bb3bb4758d7ef0d6c48c1a8e78b0a411";
+
+async function hashInput(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
 const teams = [
   {name:"ROI Rangers",      emoji:"📈", members:["Jennifer","Roberto","Atea","Sara","Artem"]},
   {name:"The Converters",   emoji:"🔄", members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
@@ -333,8 +339,10 @@ window.ch = async function(name, delta){
 };
 
 // ── AUTH ────────────────────────────────────────────────
-window.unlock = function(){
-  if(document.getElementById("pininp").value === PASS){
+window.unlock = async function(){
+  const entered = document.getElementById("pininp").value;
+  const hash = await hashInput(entered);
+  if(hash === PASS_HASH){
     document.getElementById("lkscr").style.display="none";
     document.getElementById("adpan").style.display="block";
     renderAD();
