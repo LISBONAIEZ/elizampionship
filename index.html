@@ -21,8 +21,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .board{display:flex;flex-direction:column;gap:12px;max-width:660px;margin:0 auto}
 .tc{background:#fff;border:5px solid #111;box-shadow:7px 7px 0 #111;padding:10px 12px;position:relative;overflow:hidden}
 .lb-row{display:flex;align-items:center;gap:10px;position:relative;z-index:2}
-.medal{font-family:'Permanent Marker',cursive;font-size:28px;font-style:italic;position:relative}
-.medal svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .namebox{flex:1;border:3px solid #111;padding:5px 10px;box-shadow:2px 2px 0 #111;background:#fff;position:relative}
 .tname{font-family:'Permanent Marker',cursive;font-size:15px;color:#111;font-style:italic;letter-spacing:1px}
 .tsub{font-size:10px;font-weight:900;color:#888;text-transform:uppercase;letter-spacing:2px;margin-top:1px}
@@ -41,21 +39,29 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .pc0{background:#fffbe6}.pc1{background:#fde8e8}.pc2{background:#e8f4fd}.pc3{background:#e8fdf0}
 .pname{font-size:12px;font-weight:900;text-transform:uppercase;color:#111;margin-bottom:2px}
 .ppts{font-family:'Permanent Marker',cursive;font-size:24px;color:#111;line-height:1;font-style:italic}
-.awrap{max-width:700px;margin:0 auto}
-.lkscr{text-align:center;padding:40px 20px}
-.lkico{font-size:56px;margin-bottom:14px}
-.lkscr p{font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:#111;margin-bottom:14px}
-.pininp{border:5px solid #111;padding:12px 20px;font-size:20px;text-align:center;width:190px;letter-spacing:8px;font-family:'Permanent Marker',cursive;box-shadow:4px 4px 0 #111;outline:none;background:#fff;color:#111}
-.ulbtn{display:block;margin:14px auto 0;padding:12px 32px;background:#e8c84a;color:#111;border:4px solid #111;font-size:14px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;box-shadow:5px 5px 0 #111;font-family:'Nunito',sans-serif}
-.ulbtn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #111}
-.pinerr{color:#e74c3c;font-size:12px;font-weight:900;margin-top:10px;text-transform:uppercase}
+/* LOGIN */
+.awrap{max-width:460px;margin:0 auto}
+.login-box{text-align:center;padding:36px 20px}
+.login-box .lkico{font-size:52px;margin-bottom:12px}
+.login-box h2{font-family:'Permanent Marker',cursive;font-size:22px;margin-bottom:22px;font-style:italic;color:#111}
+.field{margin-bottom:14px;text-align:left}
+.field label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;color:#555}
+.field input{width:100%;border:4px solid #111;padding:10px 14px;font-size:15px;font-family:'Nunito',sans-serif;font-weight:700;box-shadow:3px 3px 0 #111;outline:none;background:#fff;color:#111}
+.field input:focus{box-shadow:5px 5px 0 #e8c84a}
+.login-btn{width:100%;padding:12px;background:#e8c84a;color:#111;border:4px solid #111;font-size:14px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:2px;box-shadow:5px 5px 0 #111;font-family:'Nunito',sans-serif;margin-top:6px}
+.login-btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #111}
+.login-err{color:#e74c3c;font-size:12px;font-weight:900;margin-top:12px;text-transform:uppercase}
+/* ADMIN PANEL */
+.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;padding:10px 14px;border:3px solid #111;background:#fffbe6;box-shadow:3px 3px 0 #111}
+.admin-user{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:#555}
+.logout-btn{padding:6px 16px;background:#fff;border:3px solid #e74c3c;font-size:11px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;box-shadow:2px 2px 0 #e74c3c;font-family:'Nunito',sans-serif;color:#e74c3c}
+.logout-btn:hover{background:#fde8e8}
 .agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:10px}
 .acard{border:3px solid #111;padding:9px 12px;display:flex;align-items:center;gap:8px;background:#fff;box-shadow:3px 3px 0 #111}
 .aname{flex:1;font-size:12px;font-weight:900;text-transform:uppercase;color:#111}
 .apts{font-family:'Permanent Marker',cursive;font-size:20px;min-width:32px;text-align:center;color:#111;font-style:italic}
 .abtn{width:28px;height:28px;border:3px solid #111;background:#fff;cursor:pointer;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:2px 2px 0 #111;font-family:'Nunito',sans-serif;color:#111}
 .abtn:hover{background:#e8c84a}
-.lkbtn{margin:18px auto 0;display:block;padding:8px 22px;background:#fff;border:3px solid #111;font-size:12px;font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:1px;box-shadow:3px 3px 0 #111;font-family:'Nunito',sans-serif;color:#111}
 .rlist{display:flex;flex-direction:column;gap:12px;max-width:600px;margin:0 auto}
 .rcard{border:5px solid #111;padding:14px 18px;box-shadow:6px 6px 0 #111}
 .rc0{background:#e8c84a}.rc1{background:#e74c3c;color:#fff}.rc2{background:#3498db;color:#fff}.rc3{background:#2ecc71}
@@ -64,7 +70,6 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 .rname{font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:1px}
 .rdesc{font-size:13px;font-weight:700;opacity:0.85;line-height:1.5}
 .rnote{text-align:center;font-size:11px;font-weight:900;color:#888;margin-top:12px;text-transform:uppercase;letter-spacing:2px}
-/* sync status */
 #sync-status{text-align:center;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:6px;margin-bottom:10px;color:#888}
 #sync-status.ok{color:#2ecc71}
 #sync-status.err{color:#e74c3c}
@@ -93,22 +98,7 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
   <line x1="793" y1="50" x2="843" y2="50" stroke="#111" stroke-width="2"/>
   <line x1="796" y1="34" x2="840" y2="34" stroke="#111" stroke-width="2"/>
   <line x1="796" y1="66" x2="840" y2="66" stroke="#111" stroke-width="2"/>
-  <circle cx="928" cy="122" r="25" fill="none" stroke="#111" stroke-width="3"/>
-  <text x="928" y="130" text-anchor="middle" font-size="19" font-weight="900" fill="#111" font-family="sans-serif">$</text>
-  <rect x="854" y="196" width="54" height="37" rx="9" fill="none" stroke="#111" stroke-width="3"/>
-  <circle cx="870" cy="214" r="3.5" fill="#111"/><circle cx="881" cy="214" r="3.5" fill="#111"/><circle cx="892" cy="214" r="3.5" fill="#111"/>
-  <polyline points="864,233 856,249 876,233" fill="none" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
-  <rect x="44" y="493" width="35" height="28" rx="2" fill="none" stroke="#111" stroke-width="3"/>
-  <line x1="44" y1="507" x2="79" y2="507" stroke="#111" stroke-width="2.5"/><line x1="62" y1="493" x2="62" y2="507" stroke="#111" stroke-width="2.5"/>
-  <text x="426" y="155" font-size="30" font-weight="900" fill="#111" font-family="sans-serif">%</text>
-  <text x="323" y="125" font-size="26" font-weight="900" fill="#111" font-family="sans-serif">123</text>
-  <text x="592" y="470" font-size="24" font-weight="900" fill="#111" font-family="sans-serif">×+?</text>
   <path d="M868,28 C868,21 861,17 857,23 C853,17 846,21 846,28 C846,36 857,46 857,46Z" fill="none" stroke="#111" stroke-width="3"/>
-  <line x1="160" y1="196" x2="184" y2="196" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  <line x1="742" y1="136" x2="766" y2="136" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  <line x1="500" y1="296" x2="524" y2="296" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  <line x1="98" y1="436" x2="122" y2="436" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-  <line x1="866" y1="336" x2="890" y2="336" stroke="#111" stroke-width="3" stroke-linecap="round"/>
   <rect x="568" y="34" width="46" height="32" rx="2" fill="none" stroke="#111" stroke-width="3"/>
   <polyline points="568,34 591,52 614,34" fill="none" stroke="#111" stroke-width="3"/>
 </svg>
@@ -121,27 +111,45 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
   <div class="tabs">
     <button class="tab active" onclick="show('lb',this)">🏆 Leaderboard</button>
     <button class="tab" onclick="show('pl',this)">👥 Players</button>
-    <button class="tab" onclick="show('ad',this)">🔒 Add Points</button>
+    <button class="tab" onclick="show('ad',this)">🔐 Admin</button>
     <button class="tab" onclick="show('ru',this)">📋 Rules</button>
   </div>
+
   <div id="lb" class="section active"></div>
   <div id="pl" class="section"></div>
+
   <div id="ad" class="section">
     <div class="awrap">
-      <div id="lkscr" class="lkscr">
-        <div class="lkico">🔒</div>
-        <p>Admin Password Required</p>
-        <input class="pininp" type="password" id="pininp" placeholder="••••" maxlength="20" onkeydown="if(event.key==='Enter')unlock()"/>
-        <button class="ulbtn" onclick="unlock()">Unlock</button>
-        <p class="pinerr" id="pinerr"></p>
+      <!-- LOGIN FORM -->
+      <div id="login-box" class="login-box">
+        <div class="lkico">🔐</div>
+        <h2>Admin Login</h2>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="inp-email" placeholder="admin@example.com"
+            onkeydown="if(event.key==='Enter')doLogin()"/>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="inp-pass" placeholder="••••••••"
+            onkeydown="if(event.key==='Enter')doLogin()"/>
+        </div>
+        <button class="login-btn" onclick="doLogin()">🔓 Login</button>
+        <p class="login-err" id="login-err"></p>
       </div>
+
+      <!-- ADMIN PANEL -->
       <div id="adpan" style="display:none">
+        <div class="admin-header">
+          <span class="admin-user" id="admin-email-label">👤 Admin</span>
+          <button class="logout-btn" onclick="doLogout()">🚪 Logout</button>
+        </div>
         <p style="text-align:center;font-size:12px;font-weight:900;color:#666;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">+ / − to update points</p>
         <div class="agrid" id="agrid"></div>
-        <button class="lkbtn" onclick="lock()">🔒 Lock Admin</button>
       </div>
     </div>
   </div>
+
   <div id="ru" class="section">
     <div class="rlist">
       <div class="rcard rc0"><div class="rtop"><span class="rpts">+10</span><span class="rname">Course / Skill / Automation</span></div><p class="rdesc">Complete any course, learn a new skill, or build an automation. 10 points each.</p></div>
@@ -157,25 +165,17 @@ h1{text-align:center;font-family:'Permanent Marker',cursive;font-size:40px;color
 </div>
 
 <script type="module">
-// ── SUPABASE ────────────────────────────────────────────
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const SUPABASE_URL  = 'https://aufnqfautulphmgugnqx.supabase.co';
 const SUPABASE_ANON = 'sb_publishable_1mkPLWRGN1kGbVQkRLAGNA_uJ-auB2q';
 const sb = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// Password is never stored in plain text — only its SHA-256 hash
-const PASS_HASH = "65ad8c3943083ff0b218579bae922c40bb3bb4758d7ef0d6c48c1a8e78b0a411";
-
-async function hashInput(str){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
 const teams = [
-  {name:"ROI Rangers",      emoji:"📈", members:["Jennifer","Roberto","Atea","Sara","Artem"]},
-  {name:"The Converters",   emoji:"🔄", members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
-  {name:"The CTR Crew",     emoji:"📊", members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
-  {name:"Last Mile Legends",emoji:"🚀", members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
+  {name:"ROI Rangers",       emoji:"📈", members:["Jennifer","Roberto","Atea","Sara","Artem"]},
+  {name:"The Converters",    emoji:"🔄", members:["Heinze","Maryna","Denis","Elson","Gabriela"]},
+  {name:"The CTR Crew",      emoji:"📊", members:["Sagar","Antonino","Jeffrey","Michele","Alex"]},
+  {name:"Last Mile Legends", emoji:"🚀", members:["Vlad","Jeremiah","Ifham","Nico","Omer"]}
 ];
 const TC      = ['#e8c84a','#e74c3c','#3498db','#2ecc71'];
 const medals  = ["🥇","🥈","🥉","4️⃣"];
@@ -183,33 +183,64 @@ const lbIcons = ['✓','→','%','★'];
 const pts     = {};
 teams.forEach(t => t.members.forEach(m => pts[m] = 0));
 
-// ── STATUS HELPER ───────────────────────────────────────
 function setStatus(msg, cls=''){
-  const el = document.getElementById('sync-status');
-  el.textContent = msg;
-  el.className = cls;
+  const el=document.getElementById('sync-status');
+  el.textContent=msg; el.className=cls;
 }
 
-// ── LOAD FROM SUPABASE ──────────────────────────────────
 async function loadPts(){
-  setStatus('⏳ Loading scores...','loading');
-  const {data, error} = await sb.from('scores').select('name, points');
-  if(error){ setStatus('⚠️ Could not load scores','err'); return; }
-  data.forEach(row => { if(pts.hasOwnProperty(row.name)) pts[row.name] = row.points; });
+  setStatus('⏳ Loading...','loading');
+  const {data,error}=await sb.from('scores').select('name,points');
+  if(error){setStatus('⚠️ Could not load scores','err');return;}
+  data.forEach(r=>{if(pts.hasOwnProperty(r.name))pts[r.name]=r.points;});
   setStatus('✓ Live scores','ok');
   renderLB(); renderPL();
 }
 
-// ── SAVE TO SUPABASE ────────────────────────────────────
 async function savePt(name, value){
   setStatus('⏳ Saving...','loading');
-  const {error} = await sb.from('scores')
-    .upsert({name, points: value}, {onConflict:'name'});
-  if(error){ setStatus('⚠️ Save failed','err'); }
-  else { setStatus('✓ Saved','ok'); }
+  const {error}=await sb.from('scores').upsert({name,points:value},{onConflict:'name'});
+  if(error){setStatus('⚠️ '+error.message,'err');}
+  else{setStatus('✓ Saved','ok');}
 }
 
-// ── FIGURES & BACKGROUNDS (unchanged visuals) ───────────
+// ── AUTH ──────────────────────────────────────────────────
+window.doLogin = async function(){
+  const email=document.getElementById('inp-email').value.trim();
+  const pass=document.getElementById('inp-pass').value;
+  document.getElementById('login-err').textContent='';
+  if(!email||!pass){document.getElementById('login-err').textContent='Please fill in both fields.';return;}
+  const {data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){
+    document.getElementById('login-err').textContent='❌ '+error.message;
+    document.getElementById('inp-pass').value='';
+  } else {
+    showAdminPanel(data.user);
+  }
+};
+
+window.doLogout = async function(){
+  await sb.auth.signOut();
+  document.getElementById('login-box').style.display='block';
+  document.getElementById('adpan').style.display='none';
+  document.getElementById('inp-email').value='';
+  document.getElementById('inp-pass').value='';
+  document.getElementById('login-err').textContent='';
+};
+
+function showAdminPanel(user){
+  document.getElementById('login-box').style.display='none';
+  document.getElementById('adpan').style.display='block';
+  document.getElementById('admin-email-label').textContent='👤 '+user.email;
+  renderAD();
+}
+
+// Restore session on page load
+sb.auth.getSession().then(({data})=>{
+  if(data?.session?.user) showAdminPanel(data.session.user);
+});
+
+// ── FIGURES ───────────────────────────────────────────────
 const POSES=[
   ['M30,20 L28,42','M29,27 L13,35 L7,27','M29,27 L45,21 L39,33','M28,42 L16,57 L8,68','M28,42 L40,55 L48,65'],
   ['M30,20 L30,43','M30,26 L10,13 L4,5','M30,26 L50,13 L56,5','M30,43 L18,59 L12,70','M30,43 L42,59 L48,70'],
@@ -221,59 +252,39 @@ const LIMB_SPARKS=[
   [[2,43,8,43],[2,36,6,36]],[[2,8,6,5],[54,8,60,5]],[[3,13,7,10],[53,13,60,10]],
   [[2,40,7,44],[2,51,7,55]],[[57,18,63,18],[2,34,8,34]],
 ];
-
 function fig(c,pi,w=44,h=62){
-  const segs=POSES[pi%5], sparks=LIMB_SPARKS[pi%5], LW=12,OW=20,HR=9;
+  const segs=POSES[pi%5],sparks=LIMB_SPARKS[pi%5],LW=12,OW=20,HR=9;
   const blk=segs.map(d=>`<path d="${d}" stroke="#111" stroke-width="${OW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
   const col=segs.map(d=>`<path d="${d}" stroke="${c}" stroke-width="${LW}" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`).join('');
   const sp=sparks.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>`).join('');
   return `<svg width="${w}" height="${h}" viewBox="2 8 60 70" style="flex-shrink:0">${sp}${blk}<circle cx="30" cy="11" r="${HR+4}" fill="#111"/>${col}<circle cx="30" cy="11" r="${HR}" fill="${c}" stroke="#111" stroke-width="2.5"/></svg>`;
 }
-
 function cardBG(){
-  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.14">
-    <circle cx="22" cy="9" r="3" fill="#111"/><circle cx="58" cy="7" r="2.5" fill="#111"/>
-    <circle cx="96" cy="10" r="3" fill="#111"/><circle cx="134" cy="7" r="2.5" fill="#111"/>
-    <circle cx="172" cy="10" r="3" fill="#111"/><circle cx="210" cy="7" r="2.5" fill="#111"/>
-    <circle cx="248" cy="10" r="3" fill="#111"/><circle cx="286" cy="7" r="3" fill="#111"/>
-    <circle cx="324" cy="9" r="2.5" fill="#111"/><circle cx="362" cy="8" r="3" fill="#111"/>
-    <circle cx="400" cy="10" r="2.5" fill="#111"/><circle cx="438" cy="7" r="3" fill="#111"/>
+  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.12">
+    <circle cx="22" cy="9" r="3" fill="#111"/><circle cx="96" cy="10" r="3" fill="#111"/>
+    <circle cx="172" cy="10" r="3" fill="#111"/><circle cx="248" cy="10" r="3" fill="#111"/>
+    <circle cx="324" cy="9" r="2.5" fill="#111"/><circle cx="400" cy="10" r="2.5" fill="#111"/>
     <line x1="6" y1="6" x2="14" y2="6" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="6" y1="6" x2="6" y2="14" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="436" y1="6" x2="444" y2="6" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="444" y1="6" x2="444" y2="14" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M40,62 L52,62 L49,58 M52,62 L49,66" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <line x1="78" y1="57" x2="86" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <line x1="86" y1="57" x2="78" y2="65" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <path d="M138,55 C138,51 133,49 131,53 C129,49 124,51 124,55 C124,60 131,65 131,65Z" fill="none" stroke="#111" stroke-width="2.5"/>
     <polyline points="0,33 7,27 14,33 21,27 28,33" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <line x1="100" y1="60" x2="112" y2="60" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-    <text x="234" y="67" font-size="12" font-weight="900" fill="#111" font-family="sans-serif">%</text>
   </svg>`;
 }
-
 function sceneBG(){
-  const pts2=[[0,16,10,16],[0,26,7,26],[0,44,12,44],[54,10,64,10],[54,50,66,50],[106,20,117,20],[106,46,116,46],[160,13,171,13],[160,40,170,40],[214,23,226,23],[214,53,224,53],[268,16,280,16],[268,42,278,42],[322,10,335,10],[322,48,333,48],[376,20,389,20],[376,46,387,46],[430,14,442,14],[430,50,440,50]];
-  const marks2=pts2.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`).join('');
-  const dots=[[34,8],[88,36],[142,56],[196,8],[250,58],[304,6],[358,56],[412,28]].map(([cx,cy])=>`<circle cx="${cx}" cy="${cy}" r="2.5" fill="#111"/>`).join('');
-  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.2">${marks2}${dots}</svg>`;
+  const ls=[[0,16,10,16],[0,26,7,26],[54,10,64,10],[106,20,117,20],[160,13,171,13],[214,23,226,23],[268,16,280,16],[322,10,335,10],[376,20,389,20],[430,14,442,14]];
+  const marks=ls.map(([x1,y1,x2,y2])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`).join('');
+  return `<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0" xmlns="http://www.w3.org/2000/svg" opacity="0.18">${marks}</svg>`;
 }
-
 function burst(n=10,r1=22,r2=32){
-  return Array.from({length:n},(_,i)=>{
-    const a=(i/n)*Math.PI*2,cos=Math.cos(a),sin=Math.sin(a);
+  return Array.from({length:n},(_,i)=>{const a=(i/n)*Math.PI*2,cos=Math.cos(a),sin=Math.sin(a);
     return `<line x1="${(36+cos*r1).toFixed(1)}" y1="${(36+sin*r1).toFixed(1)}" x2="${(36+cos*r2).toFixed(1)}" y2="${(36+sin*r2).toFixed(1)}" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>`;
   }).join('');
 }
-
 function vibLines(side){
-  const xs=side==='L'?[0,0,0]:[12,12,12], ys=[10,22,34], x2s=side==='L'?[8,6,9]:[4,6,3];
+  const xs=side==='L'?[0,0,0]:[12,12,12],ys=[10,22,34],x2s=side==='L'?[8,6,9]:[4,6,3];
   return xs.map((_,i)=>`<line x1="${xs[i]}" y1="${ys[i]}" x2="${x2s[i]}" y2="${ys[i]}" stroke="#111" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>`).join('');
 }
+const tot = t => t.members.reduce((s,m)=>s+(pts[m]||0),0);
 
-const tot = t => t.members.reduce((s,m) => s + (pts[m]||0), 0);
-
-// ── RENDER LEADERBOARD ──────────────────────────────────
 function renderLB(){
   const s=[...teams].map((t,oi)=>({...t,oi})).sort((a,b)=>tot(b)-tot(a));
   document.getElementById("lb").innerHTML='<div class="board">'+s.map((t,i)=>{
@@ -285,12 +296,11 @@ function renderLB(){
     const vibR=`<svg width="14" height="48" viewBox="0 0 14 48" style="position:absolute;left:100%;top:50%;transform:translateY(-50%)">${vibLines('R')}</svg>`;
     return `<div class="tc">${cardBG()}
       <div class="lb-row">
-        <div class="medal" style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;position:relative">
+        <div style="width:52px;height:52px;display:flex;align-items:center;justify-content:center;position:relative">
           ${medalSvg}<span style="position:relative;z-index:1;font-size:26px">${medals[i]}</span>
         </div>
         <div class="namebox">
-          <div class="tname">${t.emoji} ${t.name}</div>
-          ${roughLine}
+          <div class="tname">${t.emoji} ${t.name}</div>${roughLine}
           <div class="tsub">· ${t.members.length} members ·</div>
         </div>
         <div class="scorebox" style="position:relative">
@@ -304,12 +314,9 @@ function renderLB(){
   }).join('')+'</div>';
 }
 
-// ── RENDER PLAYERS ──────────────────────────────────────
 function renderPL(){
   document.getElementById("pl").innerHTML=teams.map((t,ti)=>`<div class="tblock">
-    <div class="tlabel tl${ti}">
-      <div class="lico">${lbIcons[ti]}</div>${t.emoji} ${t.name}
-    </div>
+    <div class="tlabel tl${ti}"><div class="lico">${lbIcons[ti]}</div>${t.emoji} ${t.name}</div>
     <div class="pgrid">${t.members.map((m,mi)=>`<div class="pchip pc${ti}">
       ${fig(TC[ti],mi,58,72)}
       <div class="pname">${m}</div>
@@ -318,7 +325,6 @@ function renderPL(){
   </div>`).join('');
 }
 
-// ── RENDER ADMIN ────────────────────────────────────────
 function renderAD(){
   document.getElementById("agrid").innerHTML=teams.flatMap((t,ti)=>t.members.map(m=>`<div class="acard">
     <div style="width:26px;height:26px;border-radius:50%;background:${TC[ti]};border:2px solid #111;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;flex-shrink:0;color:#111">${m.slice(0,2).toUpperCase()}</div>
@@ -329,34 +335,12 @@ function renderAD(){
   </div>`)).join('');
 }
 
-// ── CHANGE POINTS ───────────────────────────────────────
 window.ch = async function(name, delta){
-  pts[name] = Math.max(0, (pts[name]||0) + delta);
-  const el = document.getElementById("ap-"+name);
-  if(el) el.textContent = pts[name];
+  pts[name]=Math.max(0,(pts[name]||0)+delta);
+  const el=document.getElementById("ap-"+name);
+  if(el) el.textContent=pts[name];
   renderLB(); renderPL();
   await savePt(name, pts[name]);
-};
-
-// ── AUTH ────────────────────────────────────────────────
-window.unlock = async function(){
-  const entered = document.getElementById("pininp").value;
-  const hash = await hashInput(entered);
-  if(hash === PASS_HASH){
-    document.getElementById("lkscr").style.display="none";
-    document.getElementById("adpan").style.display="block";
-    renderAD();
-  } else {
-    document.getElementById("pinerr").textContent="❌ Wrong password!";
-    document.getElementById("pininp").value="";
-  }
-};
-
-window.lock = function(){
-  document.getElementById("lkscr").style.display="block";
-  document.getElementById("adpan").style.display="none";
-  document.getElementById("pininp").value="";
-  document.getElementById("pinerr").textContent="";
 };
 
 window.show = function(id, el){
@@ -368,10 +352,7 @@ window.show = function(id, el){
   if(id==="pl") renderPL();
 };
 
-// ── INIT ────────────────────────────────────────────────
 await loadPts();
-
-// ── AUTO-REFRESH every 30s ──────────────────────────────
 setInterval(loadPts, 30000);
 </script>
 </body>
